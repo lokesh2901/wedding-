@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>S.V. Godson &amp; T. Hanna supreena - Wedding Invitation</title>
+
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@0;1&family=Cinzel&family=Dancing+Script:wght@600&display=swap">
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .invite-screen {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    box-sizing: border-box;
+
+    background: linear-gradient(
+      135deg,
+      rgb(201, 219, 189),
+      rgb(170, 191, 155)
+    );
+  }
+
+  /* Floating petals */
+  .petal-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .petal-layer span {
+    position: absolute;
+    top: -10%;
+    opacity: 0.75;
+
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes fall {
+    from {
+      transform: translateY(0) rotate(0deg);
+    }
+
+    to {
+      transform: translateY(110vh) rotate(120deg);
+    }
+  }
+
+  /* Corner flowers */
+  .corner-flower {
+    position: absolute;
+    font-size: 26px;
+    opacity: 0.7;
+
+    animation: drift 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    from {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(-8px);
+    }
+  }
+
+  .flower-tl {
+    top: 20px;
+    left: 24px;
+  }
+
+  .flower-tr {
+    top: 26px;
+    right: 32px;
+    font-size: 20px;
+    opacity: 0.6;
+    animation-delay: 0.5s;
+  }
+
+  .flower-bl {
+    bottom: 28px;
+    left: 36px;
+    animation-delay: 1s;
+  }
+
+  .flower-br {
+    bottom: 22px;
+    right: 24px;
+    animation-delay: 1.5s;
+  }
+
+  /* Envelope */
+  .envelope-btn {
+    all: unset;
+
+    cursor: pointer;
+    position: relative;
+    display: block;
+
+    transition:
+      transform 0.4s ease,
+      filter 0.4s ease;
+  }
+
+  .envelope-btn:hover,
+  .envelope-btn:focus-visible {
+    transform: scale(1.05);
+  }
+
+  .envelope-btn:active {
+    transform: scale(0.98);
+  }
+
+  .envelope-btn img {
+    width: 280px;
+    height: auto;
+    display: block;
+
+    filter:
+      drop-shadow(0 10px 22px rgba(0, 0, 0, 0.18));
+  }
+
+  @media (min-width: 640px) {
+    .envelope-btn img {
+      width: 360px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .envelope-btn img {
+      width: 420px;
+    }
+  }
+
+  /* Envelope seal */
+  .envelope-seal-wrap {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: none;
+  }
+
+  .envelope-seal {
+    width: 76px;
+    height: 76px;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        circle at 35% 30%,
+        #f3d98b,
+        #c9a23a
+      );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+      0 4px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  .envelope-seal span {
+    font-family: 'Cinzel', serif;
+
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.92);
+
+    letter-spacing: 1px;
+  }
+
+  /* Invitation text */
+  .invite-text {
+    margin-top: 36px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .invite-text h2 {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 600;
+
+    font-size: 40px;
+
+    color: #3f5a3f;
+
+    margin: 0;
+  }
+
+  .invite-text p {
+    margin-top: 8px;
+
+    color: rgba(63, 90, 63, 0.8);
+
+    font-style: italic;
+    letter-spacing: 0.5px;
+  }
+
+  /* Screen-reader only heading */
+  .sr-only {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    padding: 0;
+    margin: -1px;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+  }
+</style>
+</head>
+
+<body>
+
+  <!-- Background music -->
+  <audio
+    id="bgm"
+    src="./audio/jodha_akbar.mp3"
+    preload="auto"
+    loop>
+  </audio>
+
+
+  <div class="invite-screen">
+
+    <h2 class="sr-only">
+      Wedding invitation landing screen with a sage green gradient
+      background, floating petals, and a clickable envelope that says
+      you're invited
+    </h2>
+
+
+    <!-- Falling petals -->
+    <div
+      class="petal-layer"
+      id="petals">
+    </div>
+
+
+    <!-- Decorative flowers -->
+    <span
+      class="corner-flower flower-tl"
+      aria-hidden="true">
+      🌸
+    </span>
+
+    <span
+      class="corner-flower flower-tr"
+      aria-hidden="true">
+      🪷
+    </span>
+
+    <span
+      class="corner-flower flower-bl"
+      aria-hidden="true">
+      🌿
+    </span>
+
+    <span
+      class="corner-flower flower-br"
+      aria-hidden="true">
+      💮
+    </span>
+
+    <span
+      class="corner-flower flower-br"
+      aria-hidden="true">
+      🌼
+    </span>
+
+
+    <!-- Envelope -->
+    <button
+      id="envBtn"
+      type="button"
+      aria-label="Open invitation"
+      class="envelope-btn">
+
+      <img
+        src="./asset/envelope.png"
+        alt="Wedding invitation envelope">
+
+      <span class="envelope-seal-wrap">
+
+        <span class="envelope-seal">
+
+          <span>
+            G &amp; S
+          </span>
+
+        </span>
+
+      </span>
+
+    </button>
+
+
+    <!-- Text -->
+    <div class="invite-text">
+
+      <h2>
+        You're invited
+      </h2>
+
+      <p>
+        Tap the envelope to open your invitation
+      </p>
+      <p>
+        Designed by Subadarshan
+      </p>
+
+    </div>
+
+  </div>
+
+
+<script>
+
+(function () {
+
+  /* =========================
+     FLOATING PETALS
+     ========================= */
+
+  var wrap = document.getElementById('petals');
+
+  var emojis = [
+    '🌸',
+    '🌿',
+    '🪷',
+    '🌼',
+    '💮'
+  ];
+
+  var count = 18;
+
+
+  for (var i = 0; i < count; i++) {
+
+    var s = document.createElement('span');
+
+    s.textContent =
+      emojis[
+        Math.floor(
+          Math.random() * emojis.length
+        )
+      ];
+
+
+    s.style.left =
+      (Math.random() * 94) + '%';
+
+
+    s.style.fontSize =
+      (14 + Math.random() * 20) + 'px';
+
+
+    var dur =
+      14 + Math.random() * 12;
+
+
+    var delay =
+      Math.random() * 12;
+
+
+    s.style.animationDuration =
+      dur + 's';
+
+
+    s.style.animationDelay =
+      delay + 's';
+
+
+    wrap.appendChild(s);
+
+  }
+
+
+  /* =========================
+     ENVELOPE BUTTON
+     ========================= */
+
+  var envBtn =
+    document.getElementById('envBtn');
+
+  var bgm =
+    document.getElementById('bgm');
+
+
+  envBtn.addEventListener(
+    'click',
+    function () {
+
+      /*
+       * Start music when the user
+       * clicks the envelope.
+       */
+      bgm.play().catch(function () {
+
+        console.log(
+          'Browser blocked audio playback.'
+        );
+
+      });
+
+
+      /*
+       * Open the second HTML page.
+       */
+      window.location.href =
+        'popup.html';
+
+    }
+  );
+
+
+})();
+
+</script>
+
+</body>
+</html>
